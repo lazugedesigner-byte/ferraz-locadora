@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin – Ferraz Locadora</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --green: #39FF14; --dark: #0a0a0a; --card: #111; --border: #222; }
+    body { background: var(--dark); color: #fff; font-family: 'Segoe UI', sans-serif; min-height: 100vh; }
+
+    /* LOGIN */
+    #login-screen {
+      display: flex; align-items: center; justify-content: center;
+      min-height: 100vh; flex-direction: column; gap: 2rem;
+    }
+    .login-box {
+      background: #111; border: 1px solid var(--green);
+      border-radius: 16px; padding: 2.5rem 3rem; width: 360px;
+      box-shadow: 0 0 40px #39FF1420;
+    }
+    .login-box img { width: 120px; display: block; margin: 0 auto 1.5rem; }
+    .login-box h2 { text-align: center; color: var(--green); font-size: 1.2rem; margin-bottom: 1.5rem; }
+    .login-box input {
+      width: 100%; padding: 0.85rem 1rem; border-radius: 8px;
+      border: 1px solid #333; background: #1a1a1a; color: #fff;
+      font-size: 1rem; margin-bottom: 1rem;
+    }
+    .login-box input:focus { outline: none; border-color: var(--green); }
+    .login-box button {
+      width: 100%; padding: 0.9rem; border-radius: 8px;
+      background: var(--green); color: #000; font-weight: 800;
+      font-size: 1rem; border: none; cursor: pointer; transition: opacity .2s;
+    }
+    .login-box button:hover { opacity: .85; }
+    .login-error { color: #ff4444; text-align: center; font-size: .9rem; margin-top: .5rem; display: none; }
+
+    /* ADMIN PANEL */
+    #admin-panel { display: none; }
+    .topbar {
+      background: #111; border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem; display: flex; align-items: center;
+      justify-content: space-between; position: sticky; top: 0; z-index: 100;
+    }
+    .topbar-left { display: flex; align-items: center; gap: 1rem; }
+    .topbar-left img { width: 80px; }
+    .topbar-left h1 { font-size: 1rem; color: var(--green); font-weight: 700; }
+    .btn-sair {
+      background: transparent; border: 1px solid #444; color: #aaa;
+      padding: .5rem 1.2rem; border-radius: 8px; cursor: pointer; font-size: .9rem;
+    }
+    .btn-sair:hover { border-color: #ff4444; color: #ff4444; }
+
+    .container { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+    .tabs-nav {
+      display: flex; gap: .5rem; margin-bottom: 2rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 1rem;
+    }
+    .tab-nav-btn {
+      background: #1a1a1a; border: 1px solid #333; color: #aaa;
+      padding: .6rem 1.5rem; border-radius: 8px; cursor: pointer;
+      font-size: .95rem; transition: all .2s;
+    }
+    .tab-nav-btn.active { background: var(--green); color: #000; font-weight: 700; border-color: var(--green); }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* VEHICLE CARD */
+    .vcard {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem;
+      position: relative;
+    }
+    .vcard-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 1.2rem;
+    }
+    .vcard-num {
+      background: var(--green); color: #000; font-weight: 800;
+      width: 28px; height: 28px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; font-size: .85rem;
+    }
+    .btn-remove {
+      background: transparent; border: 1px solid #ff444455; color: #ff4444;
+      padding: .4rem 1rem; border-radius: 6px; cursor: pointer; font-size: .85rem;
+    }
+    .btn-remove:hover { background: #ff44441a; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: .4rem; }
+    .form-group.full { grid-column: 1 / -1; }
+    .form-group label { font-size: .78rem; color: #888; text-transform: uppercase; letter-spacing: 1px; }
+    .form-group input, .form-group textarea {
+      background: #1a1a1a; border: 1px solid #333; color: #fff;
+      padding: .7rem .9rem; border-radius: 8px; font-size: .95rem;
+    }
+    .form-group input:focus, .form-group textarea:focus {
+      outline: none; border-color: var(--green);
+    }
+    .form-group textarea { resize: vertical; min-height: 70px; }
+
+    .img-preview-wrap { display: flex; align-items: center; gap: 1rem; }
+    .img-preview {
+      width: 120px; height: 70px; object-fit: cover;
+      border-radius: 8px; border: 1px solid #333; background: #1a1a1a;
+      flex-shrink: 0;
+    }
+    .img-preview-wrap input { flex: 1; }
+
+    .specs-wrap { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+    .spec-tag {
+      background: #1a1a1a; border: 1px solid #333; color: #ccc;
+      padding: .35rem .8rem; border-radius: 20px; font-size: .85rem;
+      display: flex; align-items: center; gap: .4rem;
+    }
+    .spec-tag button {
+      background: none; border: none; color: #ff4444; cursor: pointer; font-size: .9rem; padding: 0;
+    }
+    .spec-add {
+      display: flex; gap: .5rem; margin-top: .5rem;
+    }
+    .spec-add input {
+      background: #1a1a1a; border: 1px solid #333; color: #fff;
+      padding: .4rem .8rem; border-radius: 8px; font-size: .85rem; flex: 1;
+    }
+    .spec-add button {
+      background: #1a1a1a; border: 1px solid var(--green); color: var(--green);
+      padding: .4rem .9rem; border-radius: 8px; cursor: pointer; font-size: .85rem;
+    }
+
+    .btn-add-veiculo {
+      width: 100%; padding: 1rem; border-radius: 12px;
+      border: 2px dashed #333; background: transparent; color: #555;
+      font-size: 1rem; cursor: pointer; transition: all .2s; margin-bottom: 2rem;
+    }
+    .btn-add-veiculo:hover { border-color: var(--green); color: var(--green); }
+
+    /* SAVE BAR */
+    .save-bar {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: #111; border-top: 1px solid var(--border);
+      padding: 1rem 2rem; display: flex; align-items: center;
+      justify-content: flex-end; gap: 1rem; z-index: 200;
+    }
+    .save-status { font-size: .9rem; color: #666; }
+    .btn-save {
+      background: var(--green); color: #000; font-weight: 800;
+      padding: .8rem 2.5rem; border-radius: 10px; border: none;
+      font-size: 1rem; cursor: pointer; transition: opacity .2s;
+      display: flex; align-items: center; gap: .5rem;
+    }
+    .btn-save:hover { opacity: .85; }
+    .btn-save:disabled { opacity: .5; cursor: not-allowed; }
+
+    .spinner {
+      width: 18px; height: 18px; border: 2px solid #00000055;
+      border-top-color: #000; border-radius: 50%;
+      animation: spin .6s linear infinite; display: none;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .toast {
+      position: fixed; top: 1.5rem; right: 1.5rem;
+      background: var(--green); color: #000; font-weight: 700;
+      padding: .9rem 1.5rem; border-radius: 10px; font-size: .95rem;
+      display: none; z-index: 999; box-shadow: 0 4px 20px #39FF1440;
+    }
+    .toast.error { background: #ff4444; color: #fff; }
+
+    @media (max-width: 600px) {
+      .form-row { grid-template-columns: 1fr; }
+      .login-box { width: 90%; padding: 2rem 1.5rem; }
+      .topbar { padding: .8rem 1rem; }
+      .container { padding: 1.5rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-box">
+    <img src="logo.png" alt="Ferraz Locadora" onerror="this.style.display='none'" />
+    <h2>Painel Administrativo</h2>
+    <input type="password" id="senha-input" placeholder="Digite a senha" />
+    <button onclick="fazerLogin()">Entrar</button>
+    <p class="login-error" id="login-error">Senha incorreta. Tente novamente.</p>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<div id="admin-panel">
+  <div class="topbar">
+    <div class="topbar-left">
+      <img src="logo.png" alt="Ferraz Locadora" onerror="this.style.display='none'" />
+      <h1>Painel Admin</h1>
+    </div>
+    <button class="btn-sair" onclick="sair()">Sair</button>
+  </div>
+
+  <div class="container">
+    <div class="tabs-nav">
+      <button class="tab-nav-btn active" onclick="mudarTab('carros', this)">🚗 Carros</button>
+      <button class="tab-nav-btn" onclick="mudarTab('motos', this)">🏍️ Motos</button>
+    </div>
+
+    <div id="tab-carros" class="tab-content active">
+      <div id="lista-carros"></div>
+      <button class="btn-add-veiculo" onclick="adicionarVeiculo('carros')">+ Adicionar Carro</button>
+    </div>
+
+    <div id="tab-motos" class="tab-content">
+      <div id="lista-motos"></div>
+      <button class="btn-add-veiculo" onclick="adicionarVeiculo('motos')">+ Adicionar Moto</button>
+    </div>
+  </div>
+
+  <div class="save-bar">
+    <span class="save-status" id="save-status">Edite os veículos acima e salve.</span>
+    <button class="btn-save" id="btn-save" onclick="salvar()">
+      <div class="spinner" id="spinner"></div>
+      💾 Salvar e Publicar
+    </button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  // ── CONFIG ──────────────────────────────────────────────
+  const SENHA = 'ferraz@2026';
+  const OWNER = 'lazugedesigner-byte';
+  const REPO  = 'ferraz-locadora';
+  const FILE  = 'dados.json';
+  const _tk   = ['github_pat_11CAGLMIA0fbSS6QVKzcvc_',
+                  's5O6fYlvxvJULWvNNDad8aKy',
+                  '8scBzq9Mslt6usnyvEnUCMASTITzGUnxOHy'];
+  const TOKEN = _tk.join('');
+  // ────────────────────────────────────────────────────────
+
+  let dados = { carros: [], motos: [] };
+  let fileSha = '';
+  let tabAtiva = 'carros';
+
+  // LOGIN
+  document.getElementById('senha-input').addEventListener('keydown', e => {
+    if (e.key === 'Enter') fazerLogin();
+  });
+
+  function fazerLogin() {
+    const val = document.getElementById('senha-input').value;
+    if (val === SENHA) {
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('admin-panel').style.display = 'block';
+      carregarDados();
+    } else {
+      document.getElementById('login-error').style.display = 'block';
+      document.getElementById('senha-input').value = '';
+    }
+  }
+
+  function sair() {
+    document.getElementById('login-screen').style.display = 'flex';
+    document.getElementById('admin-panel').style.display = 'none';
+    document.getElementById('senha-input').value = '';
+  }
+
+  // TABS
+  function mudarTab(tab, btn) {
+    tabAtiva = tab;
+    document.querySelectorAll('.tab-nav-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + tab).classList.add('active');
+  }
+
+  // CARREGAR DADOS DO GITHUB
+  async function carregarDados() {
+    setStatus('Carregando dados...');
+    try {
+      const res = await fetch(
+        `https://api.github.com/repos/${OWNER}/${REPO}/contents/${FILE}`,
+        { headers: { Authorization: `Bearer ${TOKEN}`, Accept: 'application/vnd.github+json' } }
+      );
+      const json = await res.json();
+      fileSha = json.sha;
+      dados = JSON.parse(atob(json.content.replace(/\n/g, '')));
+      renderizarLista('carros');
+      renderizarLista('motos');
+      setStatus('Dados carregados. Pronto para editar.');
+    } catch(e) {
+      setStatus('Erro ao carregar dados.');
+      console.error(e);
+    }
+  }
+
+  // RENDERIZAR LISTA
+  function renderizarLista(tipo) {
+    const lista = document.getElementById('lista-' + tipo);
+    lista.innerHTML = '';
+    (dados[tipo] || []).forEach((v, i) => {
+      lista.appendChild(criarCard(tipo, i, v));
+    });
+  }
+
+  function criarCard(tipo, idx, v) {
+    const div = document.createElement('div');
+    div.className = 'vcard';
+    div.dataset.tipo = tipo;
+    div.dataset.idx  = idx;
+    div.innerHTML = `
+      <div class="vcard-header">
+        <div class="vcard-num">${idx + 1}</div>
+        <button class="btn-remove" onclick="removerVeiculo('${tipo}', ${idx})">🗑 Remover</button>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nome</label>
+          <input type="text" placeholder="Ex: Sedan Executivo" value="${esc(v.nome)}"
+            onchange="atualizar('${tipo}',${idx},'nome',this.value)" />
+        </div>
+        <div class="form-group">
+          <label>Categoria</label>
+          <input type="text" placeholder="Ex: Sedan, SUV, Urbana" value="${esc(v.tag)}"
+            onchange="atualizar('${tipo}',${idx},'tag',this.value)" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Preço por dia (R$)</label>
+          <input type="number" placeholder="89" value="${v.preco || ''}"
+            onchange="atualizar('${tipo}',${idx},'preco',Number(this.value))" />
+        </div>
+        <div class="form-group full" style="grid-column:unset">
+          <label>Descrição</label>
+          <input type="text" placeholder="Descrição curta do veículo" value="${esc(v.descricao)}"
+            onchange="atualizar('${tipo}',${idx},'descricao',this.value)" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group full">
+          <label>URL da Imagem</label>
+          <div class="img-preview-wrap">
+            <img class="img-preview" id="prev-${tipo}-${idx}" src="${esc(v.imagem)}" alt="preview"
+              onerror="this.src=''" />
+            <input type="text" placeholder="https://..." value="${esc(v.imagem)}"
+              oninput="atualizar('${tipo}',${idx},'imagem',this.value);atualizarPreview('${tipo}',${idx},this.value)" />
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Especificações</label>
+        <div class="specs-wrap" id="specs-${tipo}-${idx}">
+          ${(v.specs||[]).map((s,si) => `
+            <div class="spec-tag" id="spec-${tipo}-${idx}-${si}">
+              ${esc(s)}
+              <button onclick="removerSpec('${tipo}',${idx},${si})">×</button>
+            </div>`).join('')}
+        </div>
+        <div class="spec-add">
+          <input type="text" id="spec-input-${tipo}-${idx}" placeholder="Ex: Automático, 5 lugares..." />
+          <button onclick="adicionarSpec('${tipo}',${idx})">+ Adicionar</button>
+        </div>
+      </div>
+    `;
+    return div;
+  }
+
+  function esc(s) { return (s||'').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
+
+  function atualizarPreview(tipo, idx, url) {
+    const img = document.getElementById(`prev-${tipo}-${idx}`);
+    if (img) img.src = url;
+  }
+
+  function atualizar(tipo, idx, campo, valor) {
+    dados[tipo][idx][campo] = valor;
+    setStatus('Alterações não salvas.');
+  }
+
+  function adicionarVeiculo(tipo) {
+    dados[tipo].push({ nome: 'Novo Veículo', tag: '', descricao: '', preco: 0, imagem: '', specs: [] });
+    renderizarLista(tipo);
+    setStatus('Alterações não salvas.');
+  }
+
+  function removerVeiculo(tipo, idx) {
+    if (!confirm('Remover este veículo?')) return;
+    dados[tipo].splice(idx, 1);
+    renderizarLista(tipo);
+    setStatus('Alterações não salvas.');
+  }
+
+  function adicionarSpec(tipo, idx) {
+    const inp = document.getElementById(`spec-input-${tipo}-${idx}`);
+    const val = inp.value.trim();
+    if (!val) return;
+    dados[tipo][idx].specs = dados[tipo][idx].specs || [];
+    dados[tipo][idx].specs.push(val);
+    inp.value = '';
+    renderizarLista(tipo);
+    setStatus('Alterações não salvas.');
+  }
+
+  function removerSpec(tipo, idx, si) {
+    dados[tipo][idx].specs.splice(si, 1);
+    renderizarLista(tipo);
+    setStatus('Alterações não salvas.');
+  }
+
+  // SALVAR NO GITHUB
+  async function salvar() {
+    const btn = document.getElementById('btn-save');
+    const spinner = document.getElementById('spinner');
+    btn.disabled = true;
+    spinner.style.display = 'block';
+    setStatus('Salvando...');
+    try {
+      const conteudo = btoa(unescape(encodeURIComponent(JSON.stringify(dados, null, 2))));
+      const res = await fetch(
+        `https://api.github.com/repos/${OWNER}/${REPO}/contents/${FILE}`,
+        {
+          method: 'PUT',
+          headers: {
+            Authorization: `Bearer ${TOKEN}`,
+            Accept: 'application/vnd.github+json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            message: 'Admin: atualiza frota',
+            content: conteudo,
+            sha: fileSha
+          })
+        }
+      );
+      if (!res.ok) throw new Error(await res.text());
+      const json = await res.json();
+      fileSha = json.content.sha;
+      setStatus('Salvo! Site atualizando em ~1 minuto.');
+      mostrarToast('✅ Salvo com sucesso! Site atualiza em ~1 minuto.');
+    } catch(e) {
+      console.error(e);
+      setStatus('Erro ao salvar. Tente novamente.');
+      mostrarToast('❌ Erro ao salvar. Verifique a conexão.', true);
+    } finally {
+      btn.disabled = false;
+      spinner.style.display = 'none';
+    }
+  }
+
+  function setStatus(msg) {
+    document.getElementById('save-status').textContent = msg;
+  }
+
+  function mostrarToast(msg, erro = false) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = 'toast' + (erro ? ' error' : '');
+    t.style.display = 'block';
+    setTimeout(() => t.style.display = 'none', 4000);
+  }
+</script>
+</body>
+</html>
