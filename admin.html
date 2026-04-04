@@ -88,6 +88,29 @@
     }
     .btn-remove:hover { background: #ff44441a; }
 
+    /* TOGGLE DISPONÍVEL */
+    .toggle-wrap {
+      display: flex; align-items: center; gap: .7rem;
+      background: #1a1a1a; border: 1px solid #333;
+      border-radius: 10px; padding: .6rem 1rem; width: fit-content;
+    }
+    .toggle-label { font-size: .85rem; color: #aaa; }
+    .toggle-label.on { color: var(--green); font-weight: 700; }
+    .toggle-label.off { color: #ff4444; font-weight: 700; }
+    .switch { position: relative; display: inline-block; width: 44px; height: 24px; }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .slider {
+      position: absolute; cursor: pointer; inset: 0;
+      background: #ff4444; border-radius: 24px; transition: .3s;
+    }
+    .slider:before {
+      content: ''; position: absolute;
+      width: 18px; height: 18px; left: 3px; bottom: 3px;
+      background: #fff; border-radius: 50%; transition: .3s;
+    }
+    .switch input:checked + .slider { background: var(--green); }
+    .switch input:checked + .slider:before { transform: translateX(20px); }
+
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
     .form-group { display: flex; flex-direction: column; gap: .4rem; }
     .form-group.full { grid-column: 1 / -1; }
@@ -306,6 +329,7 @@
   }
 
   function criarCard(tipo, idx, v) {
+    const disp = v.disponivel !== false;
     const div = document.createElement('div');
     div.className = 'vcard';
     div.dataset.tipo = tipo;
@@ -313,7 +337,17 @@
     div.innerHTML = `
       <div class="vcard-header">
         <div class="vcard-num">${idx + 1}</div>
-        <button class="btn-remove" onclick="removerVeiculo('${tipo}', ${idx})">🗑 Remover</button>
+        <div style="display:flex;align-items:center;gap:1rem;">
+          <div class="toggle-wrap">
+            <span class="toggle-label ${disp ? 'on' : 'off'}" id="tlabel-${tipo}-${idx}">${disp ? 'Disponível' : 'Esgotado'}</span>
+            <label class="switch">
+              <input type="checkbox" ${disp ? 'checked' : ''}
+                onchange="toggleDisponivel('${tipo}',${idx},this.checked)" />
+              <span class="slider"></span>
+            </label>
+          </div>
+          <button class="btn-remove" onclick="removerVeiculo('${tipo}', ${idx})">🗑 Remover</button>
+        </div>
       </div>
       <div class="form-row">
         <div class="form-group">
@@ -383,6 +417,16 @@
   function adicionarVeiculo(tipo) {
     dados[tipo].push({ nome: 'Novo Veículo', tag: '', descricao: '', preco: 0, imagem: '', specs: [] });
     renderizarLista(tipo);
+    setStatus('Alterações não salvas.');
+  }
+
+  function toggleDisponivel(tipo, idx, val) {
+    dados[tipo][idx].disponivel = val;
+    const lbl = document.getElementById(`tlabel-${tipo}-${idx}`);
+    if (lbl) {
+      lbl.textContent = val ? 'Disponível' : 'Esgotado';
+      lbl.className = 'toggle-label ' + (val ? 'on' : 'off');
+    }
     setStatus('Alterações não salvas.');
   }
 

@@ -2,15 +2,12 @@
   "carros": [
     {
       "nome": "Toyota Corolla",
-      "tag": "Economico - Flex",
+      "tag": "Econômico - Flex",
       "descricao": "Perfeito para cidade, com câmera de ré.",
       "preco": 110,
       "imagem": "https://www.motoragora.com.br/wp-content/uploads/2025/08/toyota-corolla-usado-vale-apena-1.jpg",
-      "specs": [
-        "Manual/Auto",
-        "Flex",
-        "5 lugares"
-      ]
+      "specs": ["Manual/Auto", "Flex", "5 lugares"],
+      "disponivel": true
     },
     {
       "nome": "Toyota Hilux CD SRV 4X4",
@@ -18,23 +15,17 @@
       "descricao": "Conforto e elegância para viagens de negócio ou lazer.",
       "preco": 250,
       "imagem": "/imagens/1519868.jpg",
-      "specs": [
-        "AutomÃ¡tico",
-        "Flex",
-        "4 lugares"
-      ]
+      "specs": ["Automático", "Flex", "4 lugares"],
+      "disponivel": true
     },
     {
       "nome": "Fiat Mobi",
       "tag": "Compacto",
-      "descricao": "Espaço, potência e segurança para toda a famí­lia.",
+      "descricao": "Espaço, potência e segurança para toda a família.",
       "preco": 89,
       "imagem": "https://th.bing.com/th/id/R.2ad9031a23baf3c7c98501e21c3d711e?rik=g0tXcOCdAzPA2Q&pid=ImgRaw&r=0",
-      "specs": [
-        "Gasolina",
-        "5 lugares",
-        "Manual"
-      ]
+      "specs": ["Gasolina", "5 lugares", "Manual"],
+      "disponivel": true
     }
   ],
   "motos": [
@@ -44,10 +35,8 @@
       "descricao": "Ideal para o dia a dia na cidade.",
       "preco": 45,
       "imagem": "https://www.motonline.com.br/noticia/wp-content/uploads/2019/01/honda-pop-110i-2019-2-450x300.jpg",
-      "specs": [
-        "110cc",
-        "gasolina"
-      ]
+      "specs": ["110cc", "Gasolina"],
+      "disponivel": true
     },
     {
       "nome": "250cc Sport",
@@ -55,21 +44,17 @@
       "descricao": "Para quem busca adrenalina com segurança e alto desempenho.",
       "preco": 75,
       "imagem": "https://images.unsplash.com/photo-1449426468159-d96dbf08f19f?w=600&h=300&fit=crop&q=80",
-      "specs": [
-        "Gasolina",
-        "250cc"
-      ]
+      "specs": ["Gasolina", "250cc"],
+      "disponivel": true
     },
     {
       "nome": "Moto Trail 300cc",
       "tag": "Trail",
-      "descricao": "Versatilidade para asfalto e estradas de chÃ£o. Aventura garantida.",
+      "descricao": "Versatilidade para asfalto e estradas de chão. Aventura garantida.",
       "preco": 95,
       "imagem": "https://images.unsplash.com/photo-1547549082-6bc09f2049ae?w=600&h=300&fit=crop&q=80",
-      "specs": [
-        "Gasolina",
-        "300cc"
-      ]
+      "specs": ["Gasolina", "300cc"],
+      "disponivel": true
     }
   ]
 }

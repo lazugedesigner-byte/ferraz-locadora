@@ -438,6 +438,21 @@
 
     .btn-card:hover { background: var(--green-dark); color: #fff; }
 
+    .btn-card-off {
+      background: #222; color: #555; cursor: not-allowed;
+      font-weight: 700; font-size: 0.82rem; padding: 0.55rem 1.3rem;
+      border-radius: 6px; border: 1px solid #333;
+    }
+    .card-esgotado { opacity: 0.6; }
+    .card-esgotado img { filter: grayscale(80%); }
+    .badge-esgotado {
+      position: absolute; top: 12px; left: 12px;
+      background: #ff4444; color: #fff;
+      font-size: 0.72rem; font-weight: 800; letter-spacing: 1px;
+      text-transform: uppercase; padding: 0.3rem 0.8rem;
+      border-radius: 20px; z-index: 2;
+    }
+
     /* ── COMO FUNCIONA ── */
     #como-funciona { background: var(--black); }
 
@@ -1469,10 +1484,12 @@
       return '⚙️';
     }
     function buildCard(v) {
-      return `<div class="card">
+      const disp = v.disponivel !== false;
+      return `<div class="card${disp ? '' : ' card-esgotado'}">
         <div class="card-img-wrap">
           <img src="${v.imagem}" alt="${v.nome}" />
           <div class="card-img-overlay"></div>
+          ${!disp ? '<div class="badge-esgotado">Esgotado</div>' : ''}
         </div>
         <div class="card-body">
           <span class="card-tag">${v.tag}</span>
@@ -1483,7 +1500,9 @@
           </div>
           <div class="card-footer">
             <div class="price">R$ ${v.preco}<small>/dia</small></div>
-            <a href="#contato" class="btn-card">Reservar</a>
+            ${disp
+              ? `<a href="#contato" class="btn-card">Reservar</a>`
+              : `<span class="btn-card btn-card-off">Indisponível</span>`}
           </div>
         </div>
       </div>`;
