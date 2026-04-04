@@ -24,7 +24,7 @@
         "Flex",
         "4 lugares"
       ],
-      "disponivel": false
+      "disponivel": true
     },
     {
       "nome": "Fiat Mobi",
@@ -37,7 +37,7 @@
         "5 lugares",
         "Manual"
       ],
-      "disponivel": true
+      "disponivel": false
     }
   ],
   "motos": [
