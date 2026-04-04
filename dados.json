@@ -24,15 +24,15 @@
       ]
     },
     {
-      "nome": "SUV FamÃ­lia",
-      "tag": "SUV",
+      "nome": "Fiat Mobi",
+      "tag": "Compacto",
       "descricao": "EspaÃ§o, potÃªncia e seguranÃ§a para toda a famÃ­lia.",
-      "preco": 189,
+      "preco": 89,
       "imagem": "https://th.bing.com/th/id/R.2ad9031a23baf3c7c98501e21c3d711e?rik=g0tXcOCdAzPA2Q&pid=ImgRaw&r=0",
       "specs": [
-        "AutomÃ¡tico",
-        "7 lugares",
-        "Gasolina"
+        "Gasolina",
+        "5 lugares",
+        "Manual"
       ]
     }
   ],
