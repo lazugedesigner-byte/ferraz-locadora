@@ -1488,7 +1488,7 @@
         </div>
       </div>`;
     }
-    fetch('/dados.json')
+    fetch('https://raw.githubusercontent.com/lazugedesigner-byte/ferraz-locadora/main/dados.json?t=' + Date.now())
       .then(r => r.json())
       .then(data => {
         const gc = document.getElementById('fleet-carros');
