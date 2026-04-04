@@ -2,7 +2,7 @@
   "carros": [
     {
       "nome": "Toyota Corolla",
-      "tag": "Econômico",
+      "tag": "Econômico - Flex",
       "descricao": "Perfeito para cidade. Econômico no combustível e fácil de estacionar.",
       "preco": 110,
       "imagem": "/imagens/469930728_1.webp",
