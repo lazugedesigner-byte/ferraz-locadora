@@ -1,12 +1,16 @@
 {
   "carros": [
     {
-      "nome": "Hatch Compacto",
+      "nome": "Toyota Corolla",
       "tag": "Econômico",
       "descricao": "Perfeito para cidade. Econômico no combustível e fácil de estacionar.",
-      "preco": 89,
-      "imagem": "https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?w=600&h=300&fit=crop&q=80",
-      "specs": ["Manual/Auto", "5 lugares", "Flex"]
+      "preco": 110,
+      "imagem": "/imagens/469930728_1.webp",
+      "specs": [
+        "Manual/Auto",
+        "5 lugares",
+        "Flex"
+      ]
     },
     {
       "nome": "Sedan Executivo",
@@ -14,7 +18,11 @@
       "descricao": "Conforto e elegância para viagens de negócio ou lazer.",
       "preco": 129,
       "imagem": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=600&h=300&fit=crop&q=80",
-      "specs": ["Automático", "5 lugares", "Flex"]
+      "specs": [
+        "Automático",
+        "5 lugares",
+        "Flex"
+      ]
     },
     {
       "nome": "SUV Família",
@@ -22,7 +30,11 @@
       "descricao": "Espaço, potência e segurança para toda a família.",
       "preco": 189,
       "imagem": "https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=600&h=300&fit=crop&q=80",
-      "specs": ["Automático", "7 lugares", "Gasolina"]
+      "specs": [
+        "Automático",
+        "7 lugares",
+        "Gasolina"
+      ]
     }
   ],
   "motos": [
@@ -32,7 +44,10 @@
       "descricao": "Ideal para o dia a dia na cidade. Econômica e ágil no trânsito.",
       "preco": 45,
       "imagem": "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=600&h=300&fit=crop&q=80",
-      "specs": ["Flex", "125cc"]
+      "specs": [
+        "Flex",
+        "125cc"
+      ]
     },
     {
       "nome": "250cc Sport",
@@ -40,7 +55,10 @@
       "descricao": "Para quem busca adrenalina com segurança e alto desempenho.",
       "preco": 75,
       "imagem": "https://images.unsplash.com/photo-1449426468159-d96dbf08f19f?w=600&h=300&fit=crop&q=80",
-      "specs": ["Gasolina", "250cc"]
+      "specs": [
+        "Gasolina",
+        "250cc"
+      ]
     },
     {
       "nome": "Moto Trail 300cc",
@@ -48,7 +66,10 @@
       "descricao": "Versatilidade para asfalto e estradas de chão. Aventura garantida.",
       "preco": 95,
       "imagem": "https://images.unsplash.com/photo-1547549082-6bc09f2049ae?w=600&h=300&fit=crop&q=80",
-      "specs": ["Gasolina", "300cc"]
+      "specs": [
+        "Gasolina",
+        "300cc"
+      ]
     }
   ]
 }
