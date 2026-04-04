@@ -1,0 +1,1568 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ferraz Locadora – Aluguel de Carros e Motos</title>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --green: #39FF14;
+      --green-dark: #28cc00;
+      --green-glow: #39FF1444;
+      --green-glow2: #39FF1422;
+      --black: #080808;
+      --black-2: #101010;
+      --black-3: #181818;
+      --black-4: #222222;
+      --text: #e8e8e8;
+      --text-dim: #777;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--text);
+      font-family: 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed;
+      top: 0; width: 100%;
+      z-index: 100;
+      background: rgba(8,8,8,0.95);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid #39FF1430;
+      padding: 0 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+    }
+
+    nav img { height: 54px; width: auto; }
+
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+
+    nav ul a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      transition: color 0.3s;
+    }
+
+    nav ul a:hover { color: var(--green); }
+
+    .nav-cta {
+      background: var(--green) !important;
+      color: #000 !important;
+      padding: 0.5rem 1.4rem;
+      border-radius: 5px;
+      font-weight: 800 !important;
+      transition: opacity 0.3s !important;
+    }
+
+    .nav-cta:hover { opacity: 0.85 !important; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      padding: 6rem 2.5rem 4rem;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1920&h=1080&fit=crop&q=80');
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.22) saturate(0.5);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 30% 50%, #39FF1418, transparent),
+        linear-gradient(to right, rgba(8,8,8,0.95) 40%, rgba(8,8,8,0.3));
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(#39FF1410 1px, transparent 1px),
+        linear-gradient(90deg, #39FF1410 1px, transparent 1px);
+      background-size: 50px 50px;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-text { }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: linear-gradient(135deg, #39FF1420, #39FF1408);
+      border: 1px solid var(--green);
+      color: var(--green);
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      padding: 0.5rem 1.4rem;
+      border-radius: 100px;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 0 16px #39FF1440, inset 0 0 12px #39FF1410;
+      animation: badgePulse 3s ease-in-out infinite;
+    }
+
+    .hero-badge .badge-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--green);
+      border-radius: 50%;
+      box-shadow: 0 0 6px var(--green);
+      animation: dotBlink 1.5s ease-in-out infinite;
+    }
+
+    @keyframes badgePulse {
+      0%, 100% { box-shadow: 0 0 16px #39FF1440, inset 0 0 12px #39FF1410; }
+      50%       { box-shadow: 0 0 28px #39FF1470, inset 0 0 18px #39FF1420; }
+    }
+
+    @keyframes dotBlink {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.3; }
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 1.2rem;
+      letter-spacing: -1px;
+    }
+
+    .hero h1 .hl { color: var(--green); text-shadow: 0 0 30px #39FF1480; }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--text-dim);
+      max-width: 480px;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .btn-primary {
+      background: var(--green);
+      color: #000;
+      font-weight: 800;
+      font-size: 0.92rem;
+      padding: 0.9rem 2rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      letter-spacing: 0.5px;
+      transition: all 0.3s;
+      box-shadow: 0 0 20px #39FF1450;
+    }
+
+    .btn-primary:hover {
+      background: var(--green-dark);
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 0 30px #39FF1480;
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--green);
+      font-weight: 700;
+      font-size: 0.92rem;
+      padding: 0.9rem 2rem;
+      border: 2px solid #39FF1470;
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .btn-outline:hover {
+      background: var(--green-glow);
+      border-color: var(--green);
+      transform: translateY(-2px);
+    }
+
+    .hero-image-box {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-car-img {
+      width: 100%;
+      max-width: 540px;
+      border-radius: 16px;
+      object-fit: cover;
+      height: 340px;
+      border: 1px solid #39FF1430;
+      box-shadow: 0 0 60px #39FF1430, 0 20px 60px rgba(0,0,0,0.8);
+      filter: saturate(0.9) brightness(0.95);
+    }
+
+    .hero-car-img-glow {
+      position: absolute;
+      inset: -10px;
+      border-radius: 20px;
+      background: radial-gradient(ellipse at center, #39FF1420, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* ── STATS ── */
+    .stats {
+      background: var(--black-2);
+      border-top: 1px solid #39FF1420;
+      border-bottom: 1px solid #39FF1420;
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 5rem;
+      flex-wrap: wrap;
+    }
+
+    .stat { text-align: center; }
+
+    .stat-value {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--green);
+      text-shadow: 0 0 20px #39FF1460;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-top: 0.2rem;
+    }
+
+    /* ── SECTION ── */
+    section { padding: 5.5rem 2.5rem; }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .section-title h2 {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 900;
+      letter-spacing: -0.5px;
+    }
+
+    .section-title h2 .hl { color: var(--green); }
+
+    .section-title p {
+      color: var(--text-dim);
+      margin-top: 0.5rem;
+      font-size: 0.95rem;
+    }
+
+    /* ── FROTA ── */
+    #frota { background: var(--black-2); }
+
+    .tabs {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .tab-btn {
+      background: var(--black-3);
+      color: var(--text-dim);
+      border: 1px solid var(--black-4);
+      padding: 0.65rem 2rem;
+      border-radius: 100px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: all 0.3s;
+    }
+
+    .tab-btn.active, .tab-btn:hover {
+      background: var(--green);
+      color: #000;
+      border-color: var(--green);
+      box-shadow: 0 0 16px #39FF1450;
+    }
+
+    .fleet-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .fleet-section { display: none; }
+    .fleet-section.active { display: grid; }
+
+    .card {
+      background: var(--black-3);
+      border: 1px solid var(--black-4);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: transform 0.35s, border-color 0.35s, box-shadow 0.35s;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      border-color: #39FF1460;
+      box-shadow: 0 8px 40px #39FF1430;
+    }
+
+    .card-img-wrap {
+      position: relative;
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+      background: var(--black-4);
+    }
+
+    .card-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+      filter: brightness(0.9) saturate(0.95);
+    }
+
+    .card:hover .card-img-wrap img { transform: scale(1.06); }
+
+    .card-img-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, var(--black-3) 0%, transparent 60%);
+    }
+
+    .card-body { padding: 1.4rem; }
+
+    .card-tag {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--green);
+      background: #39FF1415;
+      border: 1px solid #39FF1450;
+      padding: 0.2rem 0.7rem;
+      border-radius: 100px;
+      margin-bottom: 0.7rem;
+    }
+
+    .card h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 0.4rem; }
+
+    .card-desc { font-size: 0.83rem; color: var(--text-dim); margin-bottom: 1rem; }
+
+    .card-specs {
+      display: flex;
+      gap: 0.8rem;
+      font-size: 0.77rem;
+      color: var(--text-dim);
+      margin-bottom: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    .card-specs span {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      background: var(--black-4);
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .price { font-size: 1.5rem; font-weight: 900; color: var(--green); }
+    .price small { font-size: 0.72rem; color: var(--text-dim); font-weight: 400; }
+
+    .btn-card {
+      background: var(--green);
+      color: #000;
+      font-weight: 700;
+      font-size: 0.82rem;
+      padding: 0.55rem 1.3rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .btn-card:hover { background: var(--green-dark); color: #fff; }
+
+    /* ── COMO FUNCIONA ── */
+    #como-funciona { background: var(--black); }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .step {
+      text-align: center;
+      padding: 2.2rem 1.5rem;
+      background: var(--black-2);
+      border: 1px solid var(--black-4);
+      border-radius: 14px;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .step::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(to right, transparent, var(--green), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .step:hover { border-color: #39FF1440; box-shadow: 0 0 20px #39FF1418; }
+    .step:hover::before { opacity: 1; }
+
+    .step-num {
+      width: 56px;
+      height: 56px;
+      background: var(--green);
+      color: #000;
+      font-size: 1.4rem;
+      font-weight: 900;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.2rem;
+      box-shadow: 0 0 20px #39FF1460;
+    }
+
+    .step h3 { font-size: 1rem; font-weight: 800; margin-bottom: 0.5rem; }
+    .step p { font-size: 0.83rem; color: var(--text-dim); }
+
+    /* ── GALERIA ── */
+    #galeria { background: var(--black-2); }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto auto;
+      gap: 1rem;
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .gallery-item {
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid var(--black-4);
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .gallery-item:hover { border-color: #39FF1460; box-shadow: 0 0 24px #39FF1430; }
+
+    .gallery-item.big {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      min-height: 200px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s, filter 0.3s;
+      filter: brightness(0.85) saturate(0.9);
+    }
+
+    .gallery-item.big img { min-height: 420px; }
+
+    .gallery-item:hover img {
+      transform: scale(1.05);
+      filter: brightness(1) saturate(1.1);
+    }
+
+    .gallery-item-label {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 1rem;
+      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--green);
+      letter-spacing: 1px;
+    }
+
+    /* ── VANTAGENS ── */
+    #vantagens {
+      background: var(--black);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #vantagens::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%; transform: translateX(-50%);
+      width: 600px; height: 300px;
+      background: radial-gradient(ellipse at center, #39FF1412, transparent 70%);
+      pointer-events: none;
+    }
+
+    #vantagens .section-title {
+      position: relative;
+    }
+
+    #vantagens .section-title::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 3px;
+      background: var(--green);
+      border-radius: 2px;
+      margin: 1rem auto 0;
+      box-shadow: 0 0 10px #39FF1480;
+    }
+
+    .vantagens-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+      max-width: 1120px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .vantagem {
+      background: var(--black-2);
+      border: 1px solid var(--black-4);
+      border-left: 3px solid var(--green);
+      border-radius: 12px;
+      padding: 1.6rem 1.8rem;
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+      display: flex;
+      gap: 1.2rem;
+      align-items: flex-start;
+    }
+
+    .vantagem:hover {
+      border-color: var(--green);
+      border-left-color: var(--green);
+      box-shadow: 0 4px 24px #39FF1425;
+      transform: translateX(4px);
+    }
+
+    .vantagem-icon {
+      font-size: 1.6rem;
+      flex-shrink: 0;
+      width: 48px;
+      height: 48px;
+      background: #39FF1415;
+      border: 1px solid #39FF1430;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0;
+    }
+
+    .vantagem-content { flex: 1; }
+
+    .vantagem h3 {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--green);
+      margin-bottom: 0.3rem;
+      letter-spacing: 0.3px;
+    }
+
+    .vantagem p { font-size: 0.82rem; color: var(--text-dim); line-height: 1.5; }
+
+    /* ── CONTATO ── */
+    #contato { background: var(--black-2); }
+
+    .contato-wrapper {
+      max-width: 720px;
+      margin: 0 auto;
+      background: var(--black-3);
+      border: 1px solid #39FF1425;
+      border-radius: 18px;
+      padding: 3rem 2.5rem;
+      box-shadow: 0 0 60px #39FF1410;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+    }
+
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-group.full { grid-column: 1 / -1; }
+
+    label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+    }
+
+    input, select, textarea {
+      background: var(--black-4);
+      border: 1px solid #333;
+      color: var(--text);
+      padding: 0.8rem 1rem;
+      border-radius: 8px;
+      font-size: 0.92rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      width: 100%;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px #39FF1420;
+    }
+
+    select option { background: var(--black-3); }
+    textarea { resize: vertical; min-height: 110px; }
+
+    .btn-submit {
+      width: 100%;
+      margin-top: 1.2rem;
+      background: var(--green);
+      color: #000;
+      font-weight: 900;
+      font-size: 1rem;
+      padding: 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: all 0.3s;
+      box-shadow: 0 0 20px #39FF1440;
+    }
+
+    .btn-submit:hover {
+      background: var(--green-dark);
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 0 30px #39FF1470;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--black);
+      border-top: 1px solid #39FF1420;
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    footer img { height: 70px; width: auto; margin-bottom: 1.2rem; }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-links a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 0.82rem;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover { color: var(--green); }
+
+    .footer-copy { font-size: 0.75rem; color: #444; }
+
+    /* ── WHATSAPP ── */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 2rem; right: 2rem;
+      z-index: 200;
+      background: #25d366;
+      color: #fff;
+      width: 60px; height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.9rem;
+      text-decoration: none;
+      box-shadow: 0 4px 24px #25d36650;
+      transition: transform 0.3s;
+    }
+
+    .whatsapp-float:hover { transform: scale(1.12); }
+
+    /* ── TICKER ── */
+    .hero-ticker-wrap { display: none; }
+    .hero-ticker-inline { display: none; }
+
+    /* ticker e foto mobile — escondidos no desktop */
+    .ticker-mobile,
+    .hero-photo-mobile { display: none; }
+
+    .ticker-mobile {
+      width: 100%;
+      overflow: hidden;
+      background: var(--green);
+      padding: 0.6rem 0;
+      border-top: 1px solid var(--green-dark);
+      border-bottom: 1px solid var(--green-dark);
+    }
+
+    .hero-photo-mobile img {
+      width: 100%;
+      display: block;
+      height: 220px;
+      object-fit: cover;
+      border-top: 1px solid #39FF1430;
+    }
+
+    .ticker-track {
+      display: inline-flex;
+      align-items: center;
+      gap: 1.5rem;
+      white-space: nowrap;
+      animation: ticker 45s linear infinite;
+    }
+
+    .hero-ticker-wrap:hover .ticker-track {
+      animation-play-state: paused;
+    }
+
+    .ticker-track span {
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #000;
+    }
+
+    .ticker-dot {
+      font-size: 0.35rem !important;
+      opacity: 0.4;
+    }
+
+    @keyframes ticker {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ── HAMBURGER ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+      background: none;
+      border: none;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 26px;
+      height: 2px;
+      background: var(--green);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ── MOBILE MENU ── */
+    .nav-mobile {
+      display: none;
+      position: fixed;
+      top: 68px;
+      left: 0; right: 0;
+      background: rgba(8,8,8,0.98);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid #39FF1430;
+      z-index: 99;
+      padding: 1.5rem 2rem;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .nav-mobile.open { display: flex; }
+
+    .nav-mobile a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 1rem 0;
+      border-bottom: 1px solid #39FF1415;
+      transition: color 0.3s;
+    }
+
+    .nav-mobile a:last-child { border-bottom: none; }
+    .nav-mobile a:hover, .nav-mobile a.nav-cta { color: var(--green); }
+
+    .nav-mobile .nav-cta {
+      margin-top: 1rem;
+      text-align: center;
+      background: var(--green);
+      color: #000 !important;
+      padding: 0.8rem;
+      border-radius: 6px;
+      font-weight: 800 !important;
+    }
+
+    /* ── RESPONSIVE TABLET ── */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; text-align: center; }
+      .hero-image-box { display: none; }
+      .hero-buttons { justify-content: center; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-item.big { grid-column: span 2; }
+    }
+
+    /* ── RESPONSIVE MOBILE ── */
+    @media (max-width: 640px) {
+      nav ul { display: none; }
+      .hamburger { display: flex; }
+
+      /* seções */
+      section { padding: 3rem 1rem; }
+
+      /* hero compacto com imagem mobile */
+      .hero {
+        min-height: auto;
+        padding: 5.5rem 0 2rem;
+        text-align: center;
+        flex-direction: column;
+        justify-content: flex-start;
+      }
+
+      .hero-inner { gap: 1.5rem; }
+
+      .hero-text { padding: 0 1rem; }
+
+      .hero-badge { font-size: 0.68rem; }
+
+      .hero h1 { font-size: 2rem; margin-bottom: 0.8rem; }
+
+      .hero-sub { font-size: 0.9rem; margin-bottom: 1.5rem; }
+
+      .hero-buttons {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.75rem;
+        margin-bottom: 0;
+        padding: 0 1.5rem;
+      }
+
+      .btn-primary, .btn-outline {
+        text-align: center;
+        padding: 0.7rem;
+        font-size: 0.88rem;
+      }
+
+      /* esconde elementos desktop no mobile */
+      .hero-image-box { display: none !important; }
+      .hero-car-img-glow { display: none; }
+      .hero-ticker-inline { display: none; }
+
+      /* exibe elementos mobile standalone */
+      .ticker-mobile { display: block; }
+      .hero-photo-mobile { display: block; }
+
+      /* stats em linha única */
+      .stats {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 0;
+        padding: 0;
+        overflow-x: auto;
+      }
+
+      .stat {
+        flex: 1;
+        padding: 1rem 0.3rem;
+        border-right: 1px solid #39FF1415;
+        min-width: 0;
+      }
+
+      .stat:last-child { border-right: none; }
+
+      .stat-value { font-size: 1.3rem; }
+      .stat-label { font-size: 0.58rem; letter-spacing: 0.5px; }
+
+      /* títulos */
+      .section-title { margin-bottom: 2rem; }
+      .section-title h2 { font-size: 1.65rem; }
+      .section-title p { font-size: 0.85rem; }
+
+      /* abas */
+      .tabs { gap: 0.4rem; margin-bottom: 1.5rem; }
+      .tab-btn { padding: 0.55rem 1.2rem; font-size: 0.8rem; }
+
+      /* cards */
+      .fleet-grid { grid-template-columns: 1fr; gap: 1rem; }
+      .card-img-wrap { height: 180px; }
+      .card-body { padding: 1rem; }
+
+      /* galeria */
+      .gallery-grid { grid-template-columns: 1fr; gap: 0.6rem; }
+      .gallery-item.big { grid-column: span 1; }
+      .gallery-item.big img { min-height: 200px; }
+      .gallery-item img { min-height: 160px; }
+
+      /* passos */
+      .steps { grid-template-columns: 1fr; gap: 0.8rem; }
+      .step { padding: 1.5rem 1rem; }
+
+      /* vantagens */
+      .vantagens-grid { grid-template-columns: 1fr; gap: 0.7rem; }
+      .vantagem { padding: 1rem 1.2rem; gap: 1rem; }
+      .vantagem-icon { width: 40px; height: 40px; font-size: 1.2rem; border-radius: 8px; }
+      .vantagem h3 { font-size: 0.88rem; }
+      .vantagem p { font-size: 0.78rem; }
+
+      /* formulário */
+      .form-grid { grid-template-columns: 1fr; gap: 0.9rem; }
+      .contato-wrapper { padding: 1.5rem 1rem; border-radius: 12px; }
+
+      /* whatsapp */
+      .whatsapp-float { bottom: 1rem; right: 1rem; width: 50px; height: 50px; font-size: 1.5rem; }
+
+      /* footer */
+      footer { padding: 2rem 1rem; }
+      footer img { height: 55px; }
+      .footer-links { gap: 0.6rem; }
+      .footer-links a { font-size: 0.72rem; letter-spacing: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <img src="logo.png" alt="Ferraz Locadora" />
+    <ul>
+      <li><a href="#frota">Frota</a></li>
+      <li><a href="#galeria">Galeria</a></li>
+      <li><a href="#como-funciona">Como Funciona</a></li>
+      <li><a href="#vantagens">Vantagens</a></li>
+      <li><a href="#contato" class="nav-cta">Reservar Agora</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- MENU MOBILE -->
+  <div class="nav-mobile" id="nav-mobile">
+    <a href="#frota" onclick="closeMenu()">Frota</a>
+    <a href="#galeria" onclick="closeMenu()">Galeria</a>
+    <a href="#como-funciona" onclick="closeMenu()">Como Funciona</a>
+    <a href="#vantagens" onclick="closeMenu()">Vantagens</a>
+    <a href="#contato" class="nav-cta" onclick="closeMenu()">Reservar Agora</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero" id="inicio">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-inner">
+      <div class="hero-text">
+        <div class="hero-badge"><span class="badge-dot"></span> Ibicuí-BA e Região <span class="badge-dot"></span></div>
+        <h1>Aluguel de<br><span class="hl">Carros</span> e <span class="hl">Motos</span></h1>
+        <p class="hero-sub">Veículos revisados, preços justos e atendimento que coloca você na estrada com agilidade e segurança.</p>
+        <div class="hero-buttons">
+          <a href="#frota" class="btn-primary">&#128663; Ver Frota</a>
+          <a href="#contato" class="btn-outline">Fale Conosco</a>
+        </div>
+      </div>
+      <div class="hero-image-box">
+        <div class="hero-car-img-glow"></div>
+        <img
+          class="hero-car-img"
+          src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&h=500&fit=crop&q=85"
+          alt="Carro de luxo"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- TICKER MOBILE (fora do hero) -->
+  <div class="ticker-mobile">
+    <div class="ticker-track">
+      <span>PREÇO JUSTO</span><span class="ticker-dot">&#9679;</span>
+      <span>VEÍCULOS REVISADOS</span><span class="ticker-dot">&#9679;</span>
+      <span>CARROS E MOTOS</span><span class="ticker-dot">&#9679;</span>
+      <span>SEGURO INCLUSO</span><span class="ticker-dot">&#9679;</span>
+      <span>ATENDIMENTO 24H</span><span class="ticker-dot">&#9679;</span>
+      <span>RESERVA RÁPIDA</span><span class="ticker-dot">&#9679;</span>
+      <span>ENTREGA NO LOCAL</span><span class="ticker-dot">&#9679;</span>
+      <span>PREÇO JUSTO</span><span class="ticker-dot">&#9679;</span>
+      <span>VEÍCULOS REVISADOS</span><span class="ticker-dot">&#9679;</span>
+      <span>CARROS E MOTOS</span><span class="ticker-dot">&#9679;</span>
+      <span>SEGURO INCLUSO</span><span class="ticker-dot">&#9679;</span>
+      <span>ATENDIMENTO 24H</span><span class="ticker-dot">&#9679;</span>
+      <span>RESERVA RÁPIDA</span><span class="ticker-dot">&#9679;</span>
+      <span>ENTREGA NO LOCAL</span><span class="ticker-dot">&#9679;</span>
+    </div>
+  </div>
+
+  <!-- FOTO MOBILE (fora do hero) -->
+  <div class="hero-photo-mobile">
+    <img
+      src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&h=500&fit=crop&q=85"
+      alt="Carro de luxo"
+    />
+  </div>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-value">5</div>
+      <div class="stat-label">Veículos Disponíveis</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">200+</div>
+      <div class="stat-label">Clientes Satisfeitos</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">5 anos</div>
+      <div class="stat-label">No Mercado</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">24h</div>
+      <div class="stat-label">Suporte</div>
+    </div>
+  </div>
+
+  <!-- FROTA -->
+  <section id="frota">
+    <div class="section-title">
+      <h2>Nossa <span class="hl">Frota</span></h2>
+      <p>Escolha o veículo ideal para a sua necessidade</p>
+    </div>
+
+    <div class="tabs">
+      <button class="tab-btn active" onclick="showFleet('carros', this)">&#128663; Carros</button>
+      <button class="tab-btn" onclick="showFleet('motos', this)">&#127949; Motos</button>
+    </div>
+
+    <!-- CARROS -->
+    <div id="fleet-carros" class="fleet-grid fleet-section active">
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?w=600&h=300&fit=crop&q=80" alt="Hatch Compacto" />
+          <div class="card-img-overlay"></div>
+        </div>
+        <div class="card-body">
+          <span class="card-tag">Econômico</span>
+          <h3>Hatch Compacto</h3>
+          <p class="card-desc">Perfeito para cidade. Econômico no combustível e fácil de estacionar.</p>
+          <div class="card-specs">
+            <span>&#9981; Manual/Auto</span>
+            <span>&#128101; 5 lugares</span>
+            <span>&#128167; Flex</span>
+          </div>
+          <div class="card-footer">
+            <div class="price">R$ 89<small>/dia</small></div>
+            <a href="#contato" class="btn-card">Reservar</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=600&h=300&fit=crop&q=80" alt="Sedan Executivo" />
+          <div class="card-img-overlay"></div>
+        </div>
+        <div class="card-body">
+          <span class="card-tag">Sedan</span>
+          <h3>Sedan Executivo</h3>
+          <p class="card-desc">Conforto e elegância para viagens de negócio ou lazer.</p>
+          <div class="card-specs">
+            <span>&#9981; Automático</span>
+            <span>&#128101; 5 lugares</span>
+            <span>&#128167; Flex</span>
+          </div>
+          <div class="card-footer">
+            <div class="price">R$ 129<small>/dia</small></div>
+            <a href="#contato" class="btn-card">Reservar</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=600&h=300&fit=crop&q=80" alt="SUV Família" />
+          <div class="card-img-overlay"></div>
+        </div>
+        <div class="card-body">
+          <span class="card-tag">SUV</span>
+          <h3>SUV Família</h3>
+          <p class="card-desc">Espaço, potência e segurança para toda a família.</p>
+          <div class="card-specs">
+            <span>&#9981; Automático</span>
+            <span>&#128101; 7 lugares</span>
+            <span>&#128167; Gasolina</span>
+          </div>
+          <div class="card-footer">
+            <div class="price">R$ 189<small>/dia</small></div>
+            <a href="#contato" class="btn-card">Reservar</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- MOTOS -->
+    <div id="fleet-motos" class="fleet-grid fleet-section">
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=600&h=300&fit=crop&q=80" alt="125cc Urbana" />
+          <div class="card-img-overlay"></div>
+        </div>
+        <div class="card-body">
+          <span class="card-tag">Urbana</span>
+          <h3>125cc Urbana</h3>
+          <p class="card-desc">Ideal para o dia a dia na cidade. Econômica e ágil no trânsito.</p>
+          <div class="card-specs">
+            <span>&#128167; Flex</span>
+            <span>&#9889; 125cc</span>
+          </div>
+          <div class="card-footer">
+            <div class="price">R$ 45<small>/dia</small></div>
+            <a href="#contato" class="btn-card">Reservar</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1449426468159-d96dbf08f19f?w=600&h=300&fit=crop&q=80" alt="250cc Sport" />
+          <div class="card-img-overlay"></div>
+        </div>
+        <div class="card-body">
+          <span class="card-tag">Sport</span>
+          <h3>250cc Sport</h3>
+          <p class="card-desc">Para quem busca adrenalina com segurança e alto desempenho.</p>
+          <div class="card-specs">
+            <span>&#128167; Gasolina</span>
+            <span>&#9889; 250cc</span>
+          </div>
+          <div class="card-footer">
+            <div class="price">R$ 75<small>/dia</small></div>
+            <a href="#contato" class="btn-card">Reservar</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1547549082-6bc09f2049ae?w=600&h=300&fit=crop&q=80" alt="Trail 300cc" />
+          <div class="card-img-overlay"></div>
+        </div>
+        <div class="card-body">
+          <span class="card-tag">Trail</span>
+          <h3>Moto Trail 300cc</h3>
+          <p class="card-desc">Versatilidade para asfalto e estradas de chão. Aventura garantida.</p>
+          <div class="card-specs">
+            <span>&#128167; Gasolina</span>
+            <span>&#9889; 300cc</span>
+          </div>
+          <div class="card-footer">
+            <div class="price">R$ 95<small>/dia</small></div>
+            <a href="#contato" class="btn-card">Reservar</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- GALERIA -->
+  <section id="galeria">
+    <div class="section-title">
+      <h2>Nossa <span class="hl">Galeria</span></h2>
+      <p>Conheça um pouco da nossa frota</p>
+    </div>
+    <div class="gallery-grid">
+
+      <div class="gallery-item big">
+        <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=900&h=600&fit=crop&q=85" alt="Carro esportivo" />
+        <div class="gallery-item-label">Frota de Carros</div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=500&h=300&fit=crop&q=80" alt="Moto" />
+        <div class="gallery-item-label">Motos Sport</div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1504215680853-026ed2a45def?w=500&h=300&fit=crop&q=80" alt="Moto urbana" />
+        <div class="gallery-item-label">Motos Urbanas</div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=600&h=300&fit=crop&q=80" alt="SUV" />
+        <div class="gallery-item-label">SUVs</div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?w=600&h=300&fit=crop&q=80" alt="Carro sedan" />
+        <div class="gallery-item-label">Sedans</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- COMO FUNCIONA -->
+  <section id="como-funciona">
+    <div class="section-title">
+      <h2>Como <span class="hl">Funciona</span></h2>
+      <p>Em 4 passos simples você já está na estrada</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Escolha o Veículo</h3>
+        <p>Navegue pela nossa frota e encontre o veículo perfeito para você.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Faça a Reserva</h3>
+        <p>Preencha o formulário ou entre em contato via WhatsApp.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Apresente os Docs</h3>
+        <p>CNH válida, documento e comprovante de residência.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h3>Pegue as Chaves</h3>
+        <p>Retire o veículo em nossa loja e aproveite a viagem!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VANTAGENS -->
+  <section id="vantagens">
+    <div class="section-title">
+      <h2>Por que a <span class="hl">Ferraz</span>?</h2>
+      <p>Diferenciais que fazem a diferença</p>
+    </div>
+    <div class="vantagens-grid">
+      <div class="vantagem">
+        <div class="vantagem-icon">&#9989;</div>
+        <div class="vantagem-content">
+          <h3>Veículos Revisados</h3>
+          <p>Toda a frota passa por revisão técnica antes de cada locação.</p>
+        </div>
+      </div>
+      <div class="vantagem">
+        <div class="vantagem-icon">&#128176;</div>
+        <div class="vantagem-content">
+          <h3>Preço Justo</h3>
+          <p>Sem taxas escondidas. O que você vê é o que você paga.</p>
+        </div>
+      </div>
+      <div class="vantagem">
+        <div class="vantagem-icon">&#128241;</div>
+        <div class="vantagem-content">
+          <h3>Atendimento 24h</h3>
+          <p>Suporte via WhatsApp a qualquer hora do dia ou da noite.</p>
+        </div>
+      </div>
+      <div class="vantagem">
+        <div class="vantagem-icon">&#128737;</div>
+        <div class="vantagem-content">
+          <h3>Seguro Incluso</h3>
+          <p>Todos os veículos possuem seguro básico incluso na diária.</p>
+        </div>
+      </div>
+      <div class="vantagem">
+        <div class="vantagem-icon">&#128197;</div>
+        <div class="vantagem-content">
+          <h3>Reserva Fácil</h3>
+          <p>Reserva online em minutos, sem burocracia excessiva.</p>
+        </div>
+      </div>
+      <div class="vantagem">
+        <div class="vantagem-icon">&#128663;</div>
+        <div class="vantagem-content">
+          <h3>Entrega no Local</h3>
+          <p>Levamos o veículo até você mediante consulta de disponibilidade.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section id="contato">
+    <div class="section-title">
+      <h2>Faça sua <span class="hl">Reserva</span></h2>
+      <p>Preencha o formulário e entraremos em contato rapidamente</p>
+    </div>
+    <div class="contato-wrapper">
+      <form onsubmit="handleSubmit(event)">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="f-nome">Nome Completo</label>
+            <input id="f-nome" type="text" placeholder="Seu nome" required />
+          </div>
+          <div class="form-group">
+            <label for="f-tel">WhatsApp / Telefone</label>
+            <input id="f-tel" type="tel" placeholder="(00) 00000-0000" required />
+          </div>
+          <div class="form-group">
+            <label for="f-veiculo">Tipo de Veículo</label>
+            <select id="f-veiculo" required>
+              <option value="" disabled selected>Selecione...</option>
+              <optgroup label="Carros">
+                <option>Hatch Compacto – R$ 89/dia</option>
+                <option>Sedan Executivo – R$ 129/dia</option>
+                <option>SUV Família – R$ 189/dia</option>
+              </optgroup>
+              <optgroup label="Motos">
+                <option>125cc Urbana – R$ 45/dia</option>
+                <option>250cc Sport – R$ 75/dia</option>
+                <option>Trail 300cc – R$ 95/dia</option>
+              </optgroup>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="f-retirada">Data de Retirada</label>
+            <input id="f-retirada" type="date" required />
+          </div>
+          <div class="form-group">
+            <label for="f-devolucao">Data de Devolução</label>
+            <input id="f-devolucao" type="date" required />
+          </div>
+          <div class="form-group">
+            <label for="f-cidade">Cidade de Retirada</label>
+            <input id="f-cidade" type="text" placeholder="Sua cidade" />
+          </div>
+          <div class="form-group full">
+            <label for="f-obs">Observações (opcional)</label>
+            <textarea id="f-obs" placeholder="Algum detalhe adicional?"></textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn-submit">&#128663; Solicitar Reserva via WhatsApp</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <img src="logo.png" alt="Ferraz Locadora" />
+    <div class="footer-links">
+      <a href="#inicio">Início</a>
+      <a href="#frota">Frota</a>
+      <a href="#galeria">Galeria</a>
+      <a href="#como-funciona">Como Funciona</a>
+      <a href="#vantagens">Vantagens</a>
+      <a href="#contato">Contato</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Ferraz Locadora de Veículos. Todos os direitos reservados.</p>
+  </footer>
+
+  <!-- WHATSAPP -->
+  <a href="https://wa.me/5573981026823" class="whatsapp-float" target="_blank" title="Fale no WhatsApp">
+    &#128172;
+  </a>
+
+  <script>
+    // Hamburguer
+    const hamburger = document.getElementById('hamburger');
+    const navMobile = document.getElementById('nav-mobile');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      navMobile.classList.toggle('open');
+    });
+
+    function closeMenu() {
+      hamburger.classList.remove('open');
+      navMobile.classList.remove('open');
+    }
+
+    function showFleet(type, btn) {
+      document.querySelectorAll('.fleet-section').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+      document.getElementById('fleet-' + type).classList.add('active');
+      btn.classList.add('active');
+    }
+
+    function handleSubmit(e) {
+      e.preventDefault();
+      const nome      = document.getElementById('f-nome').value.trim();
+      const tel       = document.getElementById('f-tel').value.trim();
+      const veiculo   = document.getElementById('f-veiculo').value;
+      const retirada  = document.getElementById('f-retirada').value;
+      const devolucao = document.getElementById('f-devolucao').value;
+      const cidade    = document.getElementById('f-cidade').value.trim();
+      const obs       = document.getElementById('f-obs').value.trim();
+
+      function fmtData(d) {
+        if (!d) return '—';
+        const [y,m,dia] = d.split('-');
+        return `${dia}/${m}/${y}`;
+      }
+
+      let msg = `Olá! Gostaria de fazer uma reserva na *Ferraz Locadora*:\n\n`;
+      msg += `👤 *Nome:* ${nome}\n`;
+      msg += `📞 *Telefone:* ${tel}\n`;
+      msg += `🚗 *Veículo:* ${veiculo}\n`;
+      msg += `📅 *Retirada:* ${fmtData(retirada)}\n`;
+      msg += `📅 *Devolução:* ${fmtData(devolucao)}\n`;
+      if (cidade) msg += `📍 *Cidade:* ${cidade}\n`;
+      if (obs)    msg += `📝 *Obs:* ${obs}\n`;
+
+      window.open(`https://wa.me/5573981026823?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    // Netlify Identity redirect
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => { document.location.href = "/admin/"; });
+        }
+      });
+    }
+
+    // Carrega frota do dados.json
+    function specIcon(s) {
+      if (/lugar/i.test(s)) return '👥';
+      if (/flex|gasolina|combustível/i.test(s)) return '💧';
+      if (/cc/i.test(s)) return '⚡';
+      return '⚙️';
+    }
+    function buildCard(v) {
+      return `<div class="card">
+        <div class="card-img-wrap">
+          <img src="${v.imagem}" alt="${v.nome}" />
+          <div class="card-img-overlay"></div>
+        </div>
+        <div class="card-body">
+          <span class="card-tag">${v.tag}</span>
+          <h3>${v.nome}</h3>
+          <p class="card-desc">${v.descricao}</p>
+          <div class="card-specs">
+            ${(v.specs || []).map(s => `<span>${specIcon(s)} ${s}</span>`).join('')}
+          </div>
+          <div class="card-footer">
+            <div class="price">R$ ${v.preco}<small>/dia</small></div>
+            <a href="#contato" class="btn-card">Reservar</a>
+          </div>
+        </div>
+      </div>`;
+    }
+    fetch('/dados.json')
+      .then(r => r.json())
+      .then(data => {
+        const gc = document.getElementById('fleet-carros');
+        const gm = document.getElementById('fleet-motos');
+        if (gc && data.carros) gc.innerHTML = data.carros.map(buildCard).join('');
+        if (gm && data.motos)  gm.innerHTML = data.motos.map(buildCard).join('');
+        // atualiza select do formulário
+        const sel = document.getElementById('f-veiculo');
+        if (sel && data) {
+          sel.innerHTML = '<option value="" disabled selected>Selecione...</option>';
+          if (data.carros?.length) {
+            const og = document.createElement('optgroup');
+            og.label = 'Carros';
+            data.carros.forEach(v => { const o = document.createElement('option'); o.textContent = `${v.nome} – R$ ${v.preco}/dia`; og.appendChild(o); });
+            sel.appendChild(og);
+          }
+          if (data.motos?.length) {
+            const og = document.createElement('optgroup');
+            og.label = 'Motos';
+            data.motos.forEach(v => { const o = document.createElement('option'); o.textContent = `${v.nome} – R$ ${v.preco}/dia`; og.appendChild(o); });
+            sel.appendChild(og);
+          }
+        }
+      })
+      .catch(() => {}); // fallback: mantém HTML estático
+
+    const navLinks = document.querySelectorAll('nav ul a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      document.querySelectorAll('section[id]').forEach(sec => {
+        if (window.scrollY >= sec.offsetTop - 80) current = sec.id;
+      });
+      navLinks.forEach(a => {
+        a.style.color = a.getAttribute('href') === '#' + current ? 'var(--green)' : '';
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "imagens"
+public_folder: "/imagens"
+
+collections:
+  - name: "frota"
+    label: "Frota de Veículos"
+    files:
+      - name: "dados"
+        label: "Carros e Motos"
+        file: "dados.json"
+        format: json
+        fields:
+          - label: "Carros"
+            name: "carros"
+            widget: "list"
+            fields:
+              - { label: "Nome", name: "nome", widget: "string" }
+              - { label: "Categoria (tag)", name: "tag", widget: "string" }
+              - { label: "Descrição", name: "descricao", widget: "text" }
+              - { label: "Preço por dia (R$)", name: "preco", widget: "number" }
+              - { label: "Imagem (URL ou upload)", name: "imagem", widget: "image" }
+              - label: "Especificações"
+                name: "specs"
+                widget: "list"
+                field: { label: "Spec", name: "spec", widget: "string" }
+
+          - label: "Motos"
+            name: "motos"
+            widget: "list"
+            fields:
+              - { label: "Nome", name: "nome", widget: "string" }
+              - { label: "Categoria (tag)", name: "tag", widget: "string" }
+              - { label: "Descrição", name: "descricao", widget: "text" }
+              - { label: "Preço por dia (R$)", name: "preco", widget: "number" }
+              - { label: "Imagem (URL ou upload)", name: "imagem", widget: "image" }
+              - label: "Especificações"
+                name: "specs"
+                widget: "list"
+                field: { label: "Spec", name: "spec", widget: "string" }
