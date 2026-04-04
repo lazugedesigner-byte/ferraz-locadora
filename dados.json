@@ -13,11 +13,11 @@
       ]
     },
     {
-      "nome": "Sedan Executivo",
-      "tag": "Sedan",
+      "nome": "Toyota Hilux CD SRV 4X4",
+      "tag": "Caminhonete",
       "descricao": "Conforto e elegância para viagens de negócio ou lazer.",
-      "preco": 129,
-      "imagem": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=600&h=300&fit=crop&q=80",
+      "preco": 250,
+      "imagem": "/imagens/1519868.jpg",
       "specs": [
         "Automático",
         "5 lugares",
