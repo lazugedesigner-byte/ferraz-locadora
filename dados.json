@@ -39,20 +39,20 @@
   ],
   "motos": [
     {
-      "nome": "125cc Urbana",
+      "nome": "POP 100",
       "tag": "Urbana",
-      "descricao": "Ideal para o dia a dia na cidade. EconÃ´mica e Ã¡gil no trÃ¢nsito.",
+      "descricao": "Ideal para o dia a dia na cidade.",
       "preco": 45,
-      "imagem": "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=600&h=300&fit=crop&q=80",
+      "imagem": "https://www.motonline.com.br/noticia/wp-content/uploads/2019/01/honda-pop-110i-2019-2-450x300.jpg",
       "specs": [
-        "Flex",
-        "125cc"
+        "110cc",
+        "gasolina"
       ]
     },
     {
       "nome": "250cc Sport",
       "tag": "Sport",
-      "descricao": "Para quem busca adrenalina com seguranÃ§a e alto desempenho.",
+      "descricao": "Para quem busca adrenalina com segurança e alto desempenho.",
       "preco": 75,
       "imagem": "https://images.unsplash.com/photo-1449426468159-d96dbf08f19f?w=600&h=300&fit=crop&q=80",
       "specs": [
