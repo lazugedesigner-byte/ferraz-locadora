@@ -286,7 +286,7 @@
       );
       const json = await res.json();
       fileSha = json.sha;
-      dados = JSON.parse(atob(json.content.replace(/\n/g, '')));
+      dados = JSON.parse(decodeURIComponent(escape(atob(json.content.replace(/\n/g, '')))));
       renderizarLista('carros');
       renderizarLista('motos');
       setStatus('Dados carregados. Pronto para editar.');

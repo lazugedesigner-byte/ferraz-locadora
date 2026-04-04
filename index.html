@@ -1492,7 +1492,7 @@
         headers: { 'Accept': 'application/vnd.github+json' }
       })
       .then(r => r.json())
-      .then(r => JSON.parse(atob(r.content.replace(/\n/g,''))))
+      .then(r => JSON.parse(decodeURIComponent(escape(atob(r.content.replace(/\n/g,''))))))
       .then(data => {
         const gc = document.getElementById('fleet-carros');
         const gm = document.getElementById('fleet-motos');
