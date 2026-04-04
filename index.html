@@ -1488,8 +1488,11 @@
         </div>
       </div>`;
     }
-    fetch('https://raw.githubusercontent.com/lazugedesigner-byte/ferraz-locadora/main/dados.json?t=' + Date.now())
+    fetch('https://api.github.com/repos/lazugedesigner-byte/ferraz-locadora/contents/dados.json', {
+        headers: { 'Accept': 'application/vnd.github+json' }
+      })
       .then(r => r.json())
+      .then(r => JSON.parse(atob(r.content.replace(/\n/g,''))))
       .then(data => {
         const gc = document.getElementById('fleet-carros');
         const gm = document.getElementById('fleet-motos');
